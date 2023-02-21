@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.7.6</version>
+		<version>3.0.2</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.aws</groupId>
@@ -14,8 +14,9 @@
 	<name>lambda</name>
 	<description>Lambda para testes de velocidade</description>
 	<properties>
-		<java.version>11</java.version>
-		<spring-cloud.version>2021.0.5</spring-cloud.version>
+		<java.version>17</java.version>
+		<spring-native.version>0.12.2</spring-native.version>
+		<spring-cloud.version>2022.0.1</spring-cloud.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -48,10 +49,15 @@
 		</dependencies>
 	</dependencyManagement>
 
-<!-- https://cloud.spring.io/spring-cloud-static/spring-cloud-function/3.0.1.RELEASE/reference/html/aws.html -->
-<!-- https://github.com/danvega/snapstart/blob/master/pom.xml -->
+<!-- https://cloud.spring.io/spring-cloud-static/spring-cloud-function/3.0.1.RELEASE/reference/html/aws.html
+	https://docs.spring.io/spring-boot/docs/current/reference/html/native-image.html
+	https://github.com/danvega/snapstart/blob/master/pom.xml -->
 	<build>
 		<plugins>
+			<plugin>
+				<groupId>org.graalvm.buildtools</groupId>
+				<artifactId>native-maven-plugin</artifactId>
+			</plugin>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
@@ -81,6 +87,29 @@
 							<resource>META-INF/spring.schemas</resource>
 						</transformer>
 					</transformers>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<version>${maven-assembly-plugin.version}</version>
+				<executions>
+					<execution>
+						<id>native-zip</id>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+						<inherited>false</inherited>
+					</execution>
+				</executions>
+				<configuration>
+					<finalName>function</finalName>
+					<appendAssemblyId>false</appendAssemblyId>
+					<includbaseDirectory>false</includbaseDirectory>
+					<descriptors>
+						<descriptor>src/assembly/native.xml</descriptor>
+					</descriptors>
 				</configuration>
 			</plugin>
 		</plugins>
