@@ -49,9 +49,11 @@
 		</dependencies>
 	</dependencyManagement>
 
-<!-- https://cloud.spring.io/spring-cloud-static/spring-cloud-function/3.0.1.RELEASE/reference/html/aws.html
+<!--
+    https://cloud.spring.io/spring-cloud-static/spring-cloud-function/3.0.1.RELEASE/reference/html/aws.html
 	https://docs.spring.io/spring-boot/docs/current/reference/html/native-image.html
-	https://github.com/danvega/snapstart/blob/master/pom.xml -->
+	https://graalvm.github.io/native-build-tools/0.9.7.1/maven-plugin.html
+	-->
 	<build>
 		<plugins>
 			<plugin>
