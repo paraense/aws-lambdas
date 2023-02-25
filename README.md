@@ -30,7 +30,7 @@ docker run -it -v /diretorio/do/projeto/:/project container-graalvm-lambda
 ```
 Após executar o comando anterior o container estará em execução, então para compile o projeto executando o comando abaixo:
 ```
-mvn clean -Pnative native:compile
+mvn clean -Pnative native:compile assembly:single
 ```
 Saia do console do container com o comando <b>exit</b>, e então navegue até o diretório do projeto e execute o binário gerado:
 ```

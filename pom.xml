@@ -106,7 +106,7 @@
 				<configuration>
 					<finalName>function</finalName>
 					<appendAssemblyId>false</appendAssemblyId>
-					<includbaseDirectory>false</includbaseDirectory>
+					<includeBaseDirectory>true</includeBaseDirectory>
 					<descriptors>
 						<descriptor>src/assembly/native.xml</descriptor>
 					</descriptors>
